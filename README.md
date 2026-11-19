@@ -49,7 +49,6 @@ UniCampus.sln
 │   └── 04_ConsultaDatos.sql Consulta de verificación de actividades e inscritos
 └── Docs/
     ├── 01_Informe_Tecnico.pdf     Informe técnico de la entrega
-    ├── informe/Informe_Tecnico.html  Fuente editable del informe (Edge → Ctrl+P → Guardar como PDF)
     └── capturas/                  Evidencias de funcionamiento y de SQL Server
 ```
 
