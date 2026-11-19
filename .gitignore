@@ -1,0 +1,44 @@
+# ---------------- Visual Studio / .NET Framework ----------------
+.vs/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.cache
+*.log
+*.tmp
+*.pdb
+packages/
+TestResults/
+_ReSharper*/
+*.DotSettings.user
+
+# Publicaciones
+[Pp]ublish/
+PublishProfiles/
+*.pubxml
+*.pubxml.user
+
+# ---------------- Archivos generados en ejecución ----------------
+# Registro técnico de errores (contiene rutas locales y usuario de Windows)
+UniCampus.Web/App_Data/Logs/
+
+# ---------------- Secretos ----------------
+# Si alguien necesita una cadena de conexión con usuario/contraseña,
+# debe ponerla en este archivo local y NO en Web.config.
+connectionStrings.local.config
+*.secrets.config
+
+# ---------------- Herramientas locales ----------------
+.claude/
+
+# ---------------- Sistema operativo ----------------
+Thumbs.db
+Desktop.ini
+.DS_Store

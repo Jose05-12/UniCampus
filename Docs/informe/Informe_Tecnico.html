@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Informe técnico UniCampus</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  :root { --vino:#7a1d36; --vino-claro:#f6e8ec; --gris:#55525a; --borde:#d9d4d8; --pendiente:#fff3b0; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color:#222; margin:0; background:#fff; }
+  h1 { font-size: 20pt; color: var(--vino); margin: 0 0 6pt; }
+  h2 { font-size: 15pt; color: var(--vino); border-bottom: 2px solid var(--vino); padding-bottom: 3pt; margin: 0 0 10pt; break-after: avoid; }
+  h3 { font-size: 12pt; color: #333; margin: 14pt 0 6pt; break-after: avoid; }
+  p { margin: 0 0 7pt; text-align: justify; }
+  ul, ol { margin: 0 0 8pt 18pt; padding: 0; }
+  li { margin-bottom: 2pt; }
+  code, pre { font-family: Consolas, "Courier New", monospace; font-size: 8.6pt; }
+  code { background:#f3f1f2; padding: 0 3px; border-radius: 3px; }
+  pre { background:#f7f5f6; border:1px solid var(--borde); border-left: 3px solid var(--vino); padding: 7pt 9pt; white-space: pre-wrap; margin: 0 0 9pt; break-inside: avoid; }
+  table { width:100%; border-collapse: collapse; margin: 0 0 10pt; font-size: 9.4pt; break-inside: auto; }
+  th, td { border:1px solid var(--borde); padding: 4pt 6pt; vertical-align: top; text-align: left; }
+  th { background: var(--vino-claro); color:#4a1022; }
+  tr { break-inside: avoid; }
+  .seccion { break-before: page; }
+  figure { margin: 6pt 0 12pt; break-inside: avoid; text-align: center; }
+  figure img { max-width: 100%; border:1px solid var(--borde); }
+  figure img.media { max-width: 72%; }
+  figure img.chica { max-width: 48%; }
+  figcaption { font-size: 8.8pt; color: var(--gris); margin-top: 3pt; font-style: italic; }
+  .pendiente { background: var(--pendiente); padding: 0 3px; }
+  .nota { background:#f4f4f6; border:1px solid var(--borde); padding: 6pt 9pt; font-size: 9.4pt; margin-bottom: 10pt; }
+  .ok { color:#1b6b33; font-weight:600; }
+  svg text { font-family: "Segoe UI", Arial, sans-serif; }
+  /* Portada */
+  .portada { height: 255mm; display:flex; flex-direction:column; justify-content:space-between; }
+  .portada .banda { background: var(--vino); color:#fff; padding: 26pt 24pt; border-radius: 6px; }
+  .portada .banda h1 { color:#fff; font-size: 26pt; margin-bottom: 4pt; }
+  .portada .banda p { color:#f3dfe5; font-size: 12pt; margin:0; text-align:left; }
+  .portada table td:first-child { width: 32%; font-weight: 600; background:#faf7f8; }
+  .indice li { margin-bottom: 3pt; }
+</style>
+</head>
+<body>
+
+<!-- ============================ PORTADA ============================ -->
+<section class="portada">
+  <div>
+    <div class="banda">
+      <p>Proyecto integrador · Tercer corte</p>
+      <h1>UniCampus</h1>
+      <p>Registro de Actividades Académicas<br>Informe técnico de la entrega final</p>
+    </div>
+    <h3 style="margin-top:22pt">Datos generales</h3>
+    <table>
+      <tr><td>Institución</td><td>Corporación Universitaria Americana</td></tr>
+      <tr><td>Asignatura</td><td>Desarrollo de Aplicaciones Web II</td></tr>
+      <tr><td>Docente</td><td>Ingeniera Cindy Fuentes</td></tr>
+      <tr><td>Entrega</td><td>Entrega final · 23 de noviembre de 2026</td></tr>
+      <tr><td>Tecnologías</td><td>C#, ASP.NET Web Forms, ADO.NET, .NET Framework 4.8, SQL Server</td></tr>
+      <tr><td>Repositorio GitHub</td><td><span class="pendiente">https://github.com/USUARIO/REPOSITORIO (completar)</span></td></tr>
+    </table>
+    <h3>Integrantes</h3>
+    <table>
+      <tr><th style="width:40%">Nombre completo</th><th style="width:25%">Usuario GitHub</th><th>Aporte principal</th></tr>
+      <tr><td>Adrian Carmona</td><td><span class="pendiente">(completar)</span></td><td><span class="pendiente">(completar)</span></td></tr>
+      <tr><td>Luis Fuentes</td><td><span class="pendiente">(completar)</span></td><td><span class="pendiente">(completar)</span></td></tr>
+      <tr><td>Rafael Acevedo</td><td><span class="pendiente">(completar)</span></td><td><span class="pendiente">(completar)</span></td></tr>
+      <tr><td>Samuel Henriquez</td><td><span class="pendiente">(completar)</span></td><td><span class="pendiente">(completar)</span></td></tr>
+    </table>
+  </div>
+  <div>
+    <h3>Contenido</h3>
+    <ol class="indice">
+      <li>Descripción del proyecto</li>
+      <li>Arquitectura de tres capas</li>
+      <li>Patrón Model-View-Presenter (MVP)</li>
+      <li>Flujo de una operación: registrar una actividad</li>
+      <li>Base de datos y diagrama entidad-relación</li>
+      <li>Validaciones y seguridad</li>
+      <li>Pruebas funcionales y evidencias</li>
+      <li>Evidencias en SQL Server</li>
+      <li>Repositorio GitHub y colaboración</li>
+      <li>Instrucciones de instalación y ejecución</li>
+      <li>Conclusiones</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ 1. DESCRIPCIÓN ============================ -->
+<section class="seccion">
+  <h2>1. Descripción del proyecto</h2>
+  <p><strong>UniCampus</strong> es una aplicación web para administrar las actividades académicas de la institución
+  (talleres, conferencias, seminarios, cursos, encuentros y ferias). Permite registrar y mantener las actividades,
+  consultarlas con búsqueda y filtros, gestionar las inscripciones de los estudiantes controlando los cupos y recoger
+  reseñas y valoraciones de quienes participaron.</p>
+  <p>El proyecto parte del formulario de registro de actividades construido en cortes anteriores y lo transforma en una
+  solución organizada en <strong>tres capas</strong> (presentación, negocio y datos) con el patrón <strong>MVP</strong>
+  en la capa de presentación, conectada a SQL Server mediante ADO.NET con consultas parametrizadas.</p>
+
+  <h3>1.1 Alcance acordado</h3>
+  <table>
+    <tr><th style="width:30%">Funcionalidad</th><th>Descripción</th><th style="width:16%">Estado</th></tr>
+    <tr><td>Inicio de sesión y roles</td><td>Administrador (coordinación académica) y Estudiante. Contraseñas con hash PBKDF2-SHA256 y salt.</td><td class="ok">Implementado</td></tr>
+    <tr><td>Gestión de actividades</td><td>Registrar, consultar, actualizar y eliminar/desactivar actividades con título, descripción, tipo, fechas, horarios, modalidad, lugar, cupos y estado.</td><td class="ok">Implementado</td></tr>
+    <tr><td>Búsqueda, filtros y detalle</td><td>Búsqueda por texto y filtros por tipo, estado y fecha; listado paginado; detalle completo y vista "como la ve el estudiante".</td><td class="ok">Implementado</td></tr>
+    <tr><td>Inscripciones</td><td>Inscripción por el administrador o autoinscripción del estudiante, cancelación, control de cupos y duplicados dentro de una transacción.</td><td class="ok">Implementado</td></tr>
+    <tr><td>Reseñas y valoraciones</td><td>Calificación de 1 a 5 y comentario, solo para estudiantes inscritos en actividades ya iniciadas; una reseña por persona y actividad.</td><td class="ok">Implementado</td></tr>
+    <tr><td>Reportes</td><td>Ocupación de cupos, inscritos por tipo de actividad y calificaciones (solo administrador).</td><td class="ok">Implementado</td></tr>
+    <tr><td>Mis inscripciones y perfil</td><td>El estudiante consulta sus actividades inscritas y sus reseñas, y puede cancelar inscripciones.</td><td class="ok">Implementado</td></tr>
+  </table>
+
+  <h3>1.2 Roles y permisos</h3>
+  <table>
+    <tr><th style="width:22%">Rol</th><th>Puede</th></tr>
+    <tr><td>Administrador</td><td>Crear, editar, eliminar/desactivar actividades; inscribir y retirar estudiantes; ver reportes; eliminar reseñas inapropiadas.</td></tr>
+    <tr><td>Estudiante</td><td>Consultar actividades; inscribirse y cancelar su inscripción; publicar una reseña en actividades en las que está inscrito y que ya iniciaron; ver sus inscripciones.</td></tr>
+  </table>
+  <p>Los permisos se verifican en la <strong>capa de negocio</strong> (por ejemplo <code>ActividadService.Guardar</code> rechaza la
+  operación si el usuario no es administrador). El usuario actual se toma siempre de la sesión del servidor, nunca de un control del formulario.</p>
+
+  <h3>1.3 Tecnologías</h3>
+  <table>
+    <tr><th style="width:34%">Herramienta</th><th>Uso en el proyecto</th></tr>
+    <tr><td>C# + ASP.NET Web Forms (.NET Framework 4.8)</td><td>Páginas <code>.aspx</code>, code-behind, página maestra <code>Site.Master</code>.</td></tr>
+    <tr><td>ADO.NET (<code>System.Data.SqlClient</code>)</td><td>Repositorios con <code>SqlCommand</code> y parámetros tipados; transacciones con <code>SqlTransaction</code>.</td></tr>
+    <tr><td>SQL Server LocalDB</td><td>Base de datos <code>UniCampusDB</code> con claves, restricciones e índices.</td></tr>
+    <tr><td>Visual Studio</td><td>Edición, compilación, depuración e IIS Express.</td></tr>
+    <tr><td>Git + GitHub</td><td>Control de versiones, ramas por funcionalidad y colaboración.</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 2. ARQUITECTURA ============================ -->
+<section class="seccion">
+  <h2>2. Arquitectura de tres capas</h2>
+  <p>La solución <code>UniCampus.sln</code> tiene cuatro proyectos. Cada capa es un proyecto independiente y las referencias
+  siguen un único sentido: <strong>Web → BLL → DAL → SQL Server</strong>. El proyecto <code>UniCampus.Entities</code> contiene las
+  clases de datos que viajan entre capas y no depende de ninguna otra.</p>
+
+  <figure>
+    <svg viewBox="0 0 900 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="fl" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a1d36"/></marker></defs>
+      <g font-size="13">
+        <rect x="15" y="20" width="195" height="190" rx="8" fill="#f6e8ec" stroke="#7a1d36" stroke-width="1.5"/>
+        <text x="112" y="44" text-anchor="middle" font-weight="700" fill="#7a1d36">Presentación</text>
+        <text x="112" y="62" text-anchor="middle" font-size="11.5" fill="#444">UniCampus.Web</text>
+        <text x="30" y="92" font-size="11.5">• Páginas .aspx + code-behind</text>
+        <text x="30" y="112" font-size="11.5">• Views: IActividadesView…</text>
+        <text x="30" y="132" font-size="11.5">• Presenters (MVP)</text>
+        <text x="30" y="152" font-size="11.5">• Site.Master, CSS</text>
+        <text x="30" y="172" font-size="11.5">• Sesión y registro de</text>
+        <text x="40" y="188" font-size="11.5">errores</text>
+
+        <rect x="240" y="20" width="195" height="190" rx="8" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <text x="337" y="44" text-anchor="middle" font-weight="700" fill="#7a1d36">Negocio</text>
+        <text x="337" y="62" text-anchor="middle" font-size="11.5" fill="#444">UniCampus.BLL</text>
+        <text x="255" y="92" font-size="11.5">• ActividadService</text>
+        <text x="255" y="112" font-size="11.5">• InscripcionService</text>
+        <text x="255" y="132" font-size="11.5">• ResenaService</text>
+        <text x="255" y="152" font-size="11.5">• UsuarioService</text>
+        <text x="255" y="172" font-size="11.5">• Validaciones, cupos,</text>
+        <text x="265" y="188" font-size="11.5">fechas, estados, permisos</text>
+
+        <rect x="465" y="20" width="195" height="190" rx="8" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <text x="562" y="44" text-anchor="middle" font-weight="700" fill="#7a1d36">Datos</text>
+        <text x="562" y="62" text-anchor="middle" font-size="11.5" fill="#444">UniCampus.DAL</text>
+        <text x="480" y="92" font-size="11.5">• ActividadRepository</text>
+        <text x="480" y="112" font-size="11.5">• InscripcionRepository</text>
+        <text x="480" y="132" font-size="11.5">• ResenaRepository</text>
+        <text x="480" y="152" font-size="11.5">• Usuario/TipoActividad…</text>
+        <text x="480" y="172" font-size="11.5">• Conexion (Web.config)</text>
+        <text x="480" y="188" font-size="11.5">• SQL parametrizado</text>
+
+        <rect x="690" y="20" width="195" height="190" rx="8" fill="#4a1022" stroke="#4a1022"/>
+        <text x="787" y="44" text-anchor="middle" font-weight="700" fill="#fff">Base de datos</text>
+        <text x="787" y="62" text-anchor="middle" font-size="11.5" fill="#f3dfe5">SQL Server · UniCampusDB</text>
+        <text x="705" y="92" font-size="11.5" fill="#fff">• TipoActividad</text>
+        <text x="705" y="112" font-size="11.5" fill="#fff">• ActividadAcademica</text>
+        <text x="705" y="132" font-size="11.5" fill="#fff">• Usuario</text>
+        <text x="705" y="152" font-size="11.5" fill="#fff">• Inscripcion</text>
+        <text x="705" y="172" font-size="11.5" fill="#fff">• Resena</text>
+        <text x="705" y="188" font-size="11.5" fill="#fff">• PK, FK, CHECK, UNIQUE</text>
+
+        <line x1="210" y1="115" x2="238" y2="115" stroke="#7a1d36" stroke-width="2" marker-end="url(#fl)"/>
+        <line x1="435" y1="115" x2="463" y2="115" stroke="#7a1d36" stroke-width="2" marker-end="url(#fl)"/>
+        <line x1="660" y1="115" x2="688" y2="115" stroke="#7a1d36" stroke-width="2" marker-end="url(#fl)"/>
+
+        <rect x="15" y="235" width="645" height="44" rx="8" fill="#f4f4f6" stroke="#999" stroke-dasharray="5 4"/>
+        <text x="337" y="255" text-anchor="middle" font-weight="700" fill="#333">UniCampus.Entities (modelos / DTO compartidos)</text>
+        <text x="337" y="272" text-anchor="middle" font-size="11.5" fill="#555">Actividad, Usuario, Inscripcion, Resena, TipoActividad, FiltroActividad, ResultadoOperacion…</text>
+      </g>
+    </svg>
+    <figcaption>Figura 1. Capas de la solución y sentido de las dependencias.</figcaption>
+  </figure>
+
+  <h3>2.1 Responsabilidades por capa</h3>
+  <table>
+    <tr><th style="width:18%">Capa</th><th style="width:22%">Proyecto</th><th>Responsabilidad</th><th style="width:22%">No hace</th></tr>
+    <tr><td>Presentación</td><td><code>UniCampus.Web</code></td><td>Mostrar formularios y resultados, capturar eventos, convertir texto a tipos, mostrar mensajes de éxito/validación/error.</td><td>No escribe SQL ni referencia la capa de datos.</td></tr>
+    <tr><td>Negocio</td><td><code>UniCampus.BLL</code></td><td>Validar campos y reglas (cupos, fechas, estados, permisos), coordinar repositorios y devolver un <code>ResultadoOperacion</code> comprensible.</td><td>No usa controles ASP.NET ni <code>System.Web</code>.</td></tr>
+    <tr><td>Datos</td><td><code>UniCampus.DAL</code></td><td>Leer y escribir en SQL Server con ADO.NET, consultas parametrizadas y transacciones.</td><td>No valida reglas de negocio ni conoce la interfaz.</td></tr>
+    <tr><td>Base de datos</td><td><code>Database/03_BaseDatos.sql</code></td><td>Persistencia, relaciones y restricciones de integridad como última barrera.</td><td>—</td></tr>
+  </table>
+
+  <h3>2.2 Referencias entre proyectos</h3>
+  <table>
+    <tr><th style="width:30%">Proyecto</th><th>Referencia a</th></tr>
+    <tr><td><code>UniCampus.Web</code></td><td><code>UniCampus.BLL</code>, <code>UniCampus.Entities</code></td></tr>
+    <tr><td><code>UniCampus.BLL</code></td><td><code>UniCampus.DAL</code>, <code>UniCampus.Entities</code></td></tr>
+    <tr><td><code>UniCampus.DAL</code></td><td><code>UniCampus.Entities</code></td></tr>
+    <tr><td><code>UniCampus.Entities</code></td><td>(ninguno)</td></tr>
+  </table>
+  <p>Se verificó que ningún archivo de <code>UniCampus.Web</code> usa <code>UniCampus.DAL</code> ni <code>System.Data.SqlClient</code>, y que
+  <code>UniCampus.BLL</code> y <code>UniCampus.DAL</code> no usan <code>System.Web</code>. La solución compila sin errores con MSBuild.</p>
+</section>
+
+<!-- ============================ 3. MVP ============================ -->
+<section class="seccion">
+  <h2>3. Patrón Model-View-Presenter (MVP)</h2>
+  <p>MVP se aplica <strong>dentro</strong> de la capa de presentación; no reemplaza las tres capas. Cada página tiene tres piezas:</p>
+  <ul>
+    <li><strong>Vista:</strong> la página <code>.aspx</code> y su code-behind. Implementa una interfaz (por ejemplo <code>IActividadesView</code>),
+      solo lee y escribe controles y delega cada evento en el Presenter.</li>
+    <li><strong>Presenter:</strong> clase (por ejemplo <code>ActividadesPresenter</code>) que recibe las acciones, convierte los datos,
+      llama a la capa de negocio y le dice a la vista qué mostrar. No contiene SQL ni controles ASP.NET.</li>
+    <li><strong>Modelo:</strong> los servicios de la BLL y las entidades de <code>UniCampus.Entities</code>.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 900 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="f2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a1d36"/></marker></defs>
+      <g font-size="12.5">
+        <rect x="20" y="40" width="240" height="120" rx="8" fill="#f6e8ec" stroke="#7a1d36" stroke-width="1.5"/>
+        <text x="140" y="66" text-anchor="middle" font-weight="700" fill="#7a1d36">Vista</text>
+        <text x="140" y="90" text-anchor="middle">Actividades.aspx (+ .cs)</text>
+        <text x="140" y="110" text-anchor="middle">implementa IActividadesView</text>
+        <text x="140" y="135" text-anchor="middle" fill="#555" font-size="11.5">Controles, eventos, mensajes</text>
+
+        <rect x="330" y="40" width="240" height="120" rx="8" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <text x="450" y="66" text-anchor="middle" font-weight="700" fill="#7a1d36">Presenter</text>
+        <text x="450" y="90" text-anchor="middle">ActividadesPresenter</text>
+        <text x="450" y="110" text-anchor="middle" fill="#555" font-size="11.5">Convierte datos, coordina,</text>
+        <text x="450" y="128" text-anchor="middle" fill="#555" font-size="11.5">controla errores</text>
+
+        <rect x="640" y="40" width="240" height="120" rx="8" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <text x="760" y="66" text-anchor="middle" font-weight="700" fill="#7a1d36">Modelo</text>
+        <text x="760" y="90" text-anchor="middle">ActividadService (BLL)</text>
+        <text x="760" y="110" text-anchor="middle">Entidades: Actividad…</text>
+        <text x="760" y="135" text-anchor="middle" fill="#555" font-size="11.5">Reglas y acceso a datos</text>
+
+        <line x1="262" y1="80" x2="328" y2="80" stroke="#7a1d36" stroke-width="2" marker-end="url(#f2)"/>
+        <text x="295" y="72" text-anchor="middle" font-size="11">evento</text>
+        <line x1="328" y1="125" x2="262" y2="125" stroke="#7a1d36" stroke-width="2" marker-end="url(#f2)"/>
+        <text x="295" y="145" text-anchor="middle" font-size="11">mostrar</text>
+        <line x1="572" y1="80" x2="638" y2="80" stroke="#7a1d36" stroke-width="2" marker-end="url(#f2)"/>
+        <text x="605" y="72" text-anchor="middle" font-size="11">llama</text>
+        <line x1="638" y1="125" x2="572" y2="125" stroke="#7a1d36" stroke-width="2" marker-end="url(#f2)"/>
+        <text x="605" y="145" text-anchor="middle" font-size="11">resultado</text>
+      </g>
+    </svg>
+    <figcaption>Figura 2. Interacción Vista – Presenter – Modelo.</figcaption>
+  </figure>
+
+  <h3>3.1 Pares Vista / Presenter de la solución</h3>
+  <table>
+    <tr><th>Página (Vista)</th><th>Interfaz</th><th>Presenter</th></tr>
+    <tr><td><code>Login.aspx</code></td><td><code>ILoginView</code></td><td><code>LoginPresenter</code></td></tr>
+    <tr><td><code>Default.aspx</code> (inicio)</td><td><code>IInicioView</code></td><td><code>InicioPresenter</code></td></tr>
+    <tr><td><code>Actividades.aspx</code></td><td><code>IActividadesView</code></td><td><code>ActividadesPresenter</code></td></tr>
+    <tr><td><code>MisInscripciones.aspx</code></td><td><code>IMisInscripcionesView</code></td><td><code>MisInscripcionesPresenter</code></td></tr>
+    <tr><td><code>Reportes.aspx</code></td><td><code>IReportesView</code></td><td><code>ReportesPresenter</code></td></tr>
+    <tr><td><code>Perfil.aspx</code></td><td><code>IPerfilView</code></td><td><code>PerfilPresenter</code></td></tr>
+  </table>
+
+  <h3>3.2 Ejemplo de código</h3>
+  <p>La vista solo delega el evento (<code>Actividades.aspx.cs</code>):</p>
+<pre>_presenter = new ActividadesPresenter(this);
+...
+protected void btnGuardar_Click(object sender, EventArgs e) { _presenter.Guardar(); }</pre>
+  <p>El contrato de la vista expone valores, no controles (<code>Views/IActividadesView.cs</code>, extracto):</p>
+<pre>public interface IActividadesView
+{
+    Usuario UsuarioActual { get; }
+    string Titulo { get; set; }
+    string Cupos  { get; set; }
+    ...
+    void MostrarExito(string mensaje);
+    void MostrarErrores(string titulo, IList&lt;string&gt; errores);
+}</pre>
+</section>
+
+<!-- ============================ 4. FLUJO ============================ -->
+<section class="seccion">
+  <h2>4. Flujo de una operación: registrar una actividad</h2>
+  <figure>
+    <svg viewBox="0 0 900 400" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="f3" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+      <g font-size="11.5">
+        <g font-weight="700" text-anchor="middle">
+          <rect x="10"  y="10" width="130" height="36" rx="6" fill="#f6e8ec" stroke="#7a1d36"/><text x="75"  y="33">Usuario</text>
+          <rect x="160" y="10" width="130" height="36" rx="6" fill="#f6e8ec" stroke="#7a1d36"/><text x="225" y="33">Actividades.aspx</text>
+          <rect x="310" y="10" width="140" height="36" rx="6" fill="#f6e8ec" stroke="#7a1d36"/><text x="380" y="33">ActividadesPresenter</text>
+          <rect x="470" y="10" width="130" height="36" rx="6" fill="#f6e8ec" stroke="#7a1d36"/><text x="535" y="33">ActividadService</text>
+          <rect x="620" y="10" width="140" height="36" rx="6" fill="#f6e8ec" stroke="#7a1d36"/><text x="690" y="33">ActividadRepository</text>
+          <rect x="780" y="10" width="110" height="36" rx="6" fill="#4a1022" stroke="#4a1022"/><text x="835" y="33" fill="#fff">SQL Server</text>
+        </g>
+        <g stroke="#bbb" stroke-dasharray="4 4">
+          <line x1="75" y1="46" x2="75" y2="390"/><line x1="225" y1="46" x2="225" y2="390"/><line x1="380" y1="46" x2="380" y2="390"/>
+          <line x1="535" y1="46" x2="535" y2="390"/><line x1="690" y1="46" x2="690" y2="390"/><line x1="835" y1="46" x2="835" y2="390"/>
+        </g>
+        <g stroke="#333" stroke-width="1.4" marker-end="url(#f3)">
+          <line x1="75" y1="80" x2="223" y2="80"/>
+          <line x1="225" y1="118" x2="378" y2="118"/>
+          <line x1="380" y1="156" x2="533" y2="156"/>
+          <line x1="535" y1="214" x2="688" y2="214"/>
+          <line x1="690" y1="244" x2="833" y2="244"/>
+          <line x1="835" y1="274" x2="692" y2="274" stroke-dasharray="5 3"/>
+          <line x1="690" y1="300" x2="537" y2="300" stroke-dasharray="5 3"/>
+          <line x1="535" y1="326" x2="382" y2="326" stroke-dasharray="5 3"/>
+          <line x1="380" y1="356" x2="227" y2="356"/>
+        </g>
+        <text x="80" y="74">1. Completa y pulsa Guardar</text>
+        <text x="230" y="112">2. Guardar()</text>
+        <text x="385" y="150">3. Guardar(actividad, usuario)</text>
+        <rect x="540" y="164" width="146" height="36" fill="#fff8e6" stroke="#e0c27a"/>
+        <text x="546" y="179" font-size="10.5">4. Permisos + Validar()</text>
+        <text x="546" y="194" font-size="10.5">si hay errores → retorna</text>
+        <text x="540" y="208">5. Insertar(actividad)</text>
+        <text x="695" y="238">6. INSERT parametrizado</text>
+        <text x="700" y="268">ActividadId nuevo</text>
+        <text x="545" y="294">id</text>
+        <text x="390" y="320">ResultadoOperacion</text>
+        <text x="232" y="350">7. MostrarExito / MostrarErrores</text>
+        <text x="232" y="378" fill="#555">   y recarga el listado</text>
+      </g>
+    </svg>
+    <figcaption>Figura 3. Secuencia del registro de una actividad (Web Forms → Presenter → Negocio → Datos → SQL Server).</figcaption>
+  </figure>
+
+  <ol>
+    <li>El administrador completa el formulario y pulsa <strong>Guardar actividad</strong>.</li>
+    <li>El evento <code>btnGuardar_Click</code> llama a <code>ActividadesPresenter.Guardar()</code>.</li>
+    <li>El Presenter lee los valores de la vista, valida el <em>formato</em> (números, fechas, horas) y construye una entidad <code>Actividad</code>.</li>
+    <li><code>ActividadService.Guardar</code> verifica que el usuario sea administrador, normaliza los textos y ejecuta <code>Validar</code>
+      (obligatorios, longitudes, tipo existente, fechas, horas, cupos, estado, duplicados). Si hay errores devuelve un
+      <code>ResultadoOperacion</code> con la lista de mensajes y no se toca la base de datos.</li>
+    <li>Si todo es válido llama a <code>ActividadRepository.Insertar</code>.</li>
+    <li>El repositorio ejecuta un <code>INSERT</code> parametrizado y devuelve el identificador generado.</li>
+    <li>El Presenter muestra el mensaje de éxito, selecciona la nueva actividad y recarga el listado.</li>
+  </ol>
+
+  <h3>4.1 Capa de datos: INSERT parametrizado</h3>
+<pre>const string sql = @"
+    INSERT INTO dbo.ActividadAcademica
+        (Titulo, Descripcion, TipoId, FechaInicio, FechaFin, HoraInicio, HoraFin,
+         Modalidad, Lugar, Cupos, Estado)
+    VALUES
+        (@Titulo, @Descripcion, @TipoId, @FechaInicio, @FechaFin, @HoraInicio, @HoraFin,
+         @Modalidad, @Lugar, @Cupos, @Estado);
+    SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+using (var cn = Conexion.Crear())
+using (var cmd = new SqlCommand(sql, cn))
+{
+    AgregarParametros(cmd, a);   // cmd.Parameters.Add("@Titulo", SqlDbType.NVarChar, 120)...
+    cn.Open();
+    return (int)cmd.ExecuteScalar();
+}</pre>
+
+  <h3>4.2 Capa de negocio: validación (extracto)</h3>
+<pre>if (string.IsNullOrWhiteSpace(a.Titulo))
+    errores.Add("El título es obligatorio.");
+else if (a.Titulo.Length &lt; 3 || a.Titulo.Length &gt; 120)
+    errores.Add("El título debe tener entre 3 y 120 caracteres.");
+...
+if (fechasCompletas &amp;&amp; a.FechaFin.Date &lt; a.FechaInicio.Date)
+    errores.Add("La fecha de fin no puede ser anterior a la fecha de inicio.");</pre>
+</section>
+
+<!-- ============================ 5. BASE DE DATOS ============================ -->
+<section class="seccion">
+  <h2>5. Base de datos y diagrama entidad-relación</h2>
+  <p>Se reutilizó el modelo trabajado en el curso: la entidad central es <code>ActividadAcademica</code>, clasificada por
+  <code>TipoActividad</code>. Para cubrir inscripciones y reseñas se usan <code>Usuario</code> (con rol Administrador o
+  Estudiante, sin duplicar tablas de personas), <code>Inscripcion</code> y <code>Resena</code>, que relacionan usuarios con actividades.</p>
+
+  <figure>
+    <svg viewBox="0 0 900 575" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <g font-size="11.5">
+        <!-- TipoActividad -->
+        <rect x="20" y="20" width="200" height="88" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <rect x="20" y="20" width="200" height="26" fill="#7a1d36"/>
+        <text x="120" y="38" text-anchor="middle" fill="#fff" font-weight="700">TipoActividad</text>
+        <text x="28" y="63"><tspan font-weight="700">PK</tspan> TipoId INT</text>
+        <text x="28" y="82">Nombre NVARCHAR(50) UQ</text>
+        <text x="28" y="101">Descripcion NVARCHAR(200)</text>
+
+        <!-- ActividadAcademica -->
+        <rect x="320" y="20" width="260" height="300" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <rect x="320" y="20" width="260" height="26" fill="#7a1d36"/>
+        <text x="450" y="38" text-anchor="middle" fill="#fff" font-weight="700">ActividadAcademica</text>
+        <text x="328" y="63"><tspan font-weight="700">PK</tspan> ActividadId INT</text>
+        <text x="328" y="83">Titulo NVARCHAR(120)</text>
+        <text x="328" y="103">Descripcion NVARCHAR(1000)</text>
+        <text x="328" y="123"><tspan font-weight="700">FK</tspan> TipoId INT</text>
+        <text x="328" y="143">FechaInicio DATE</text>
+        <text x="328" y="163">FechaFin DATE</text>
+        <text x="328" y="183">HoraInicio TIME(0)</text>
+        <text x="328" y="203">HoraFin TIME(0)</text>
+        <text x="328" y="223">Modalidad NVARCHAR(20)</text>
+        <text x="328" y="243">Lugar NVARCHAR(150)</text>
+        <text x="328" y="263">Cupos INT (1–500)</text>
+        <text x="328" y="283">Estado NVARCHAR(20)</text>
+        <text x="328" y="303">FechaCreacion DATETIME2</text>
+
+        <!-- Usuario -->
+        <rect x="680" y="20" width="200" height="186" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <rect x="680" y="20" width="200" height="26" fill="#7a1d36"/>
+        <text x="780" y="38" text-anchor="middle" fill="#fff" font-weight="700">Usuario</text>
+        <text x="688" y="63"><tspan font-weight="700">PK</tspan> UsuarioId INT</text>
+        <text x="688" y="83">Nombre NVARCHAR(100)</text>
+        <text x="688" y="103">Correo NVARCHAR(150) UQ</text>
+        <text x="688" y="123">Programa NVARCHAR(100)</text>
+        <text x="688" y="143">Rol NVARCHAR(30)</text>
+        <text x="688" y="163">PasswordHash VARBINARY(32)</text>
+        <text x="688" y="183">PasswordSalt VARBINARY(16)</text>
+        <text x="688" y="201">Activo BIT</text>
+
+        <!-- Inscripcion -->
+        <rect x="160" y="380" width="235" height="126" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <rect x="160" y="380" width="235" height="26" fill="#7a1d36"/>
+        <text x="277" y="398" text-anchor="middle" fill="#fff" font-weight="700">Inscripcion</text>
+        <text x="168" y="423"><tspan font-weight="700">PK</tspan> InscripcionId INT</text>
+        <text x="168" y="443"><tspan font-weight="700">FK</tspan> ActividadId INT</text>
+        <text x="168" y="463"><tspan font-weight="700">FK</tspan> UsuarioId INT</text>
+        <text x="168" y="483">FechaInscripcion DATETIME2</text>
+        <text x="168" y="501">Estado NVARCHAR(20)</text>
+
+        <!-- Resena -->
+        <rect x="490" y="380" width="235" height="146" fill="#fff" stroke="#7a1d36" stroke-width="1.5"/>
+        <rect x="490" y="380" width="235" height="26" fill="#7a1d36"/>
+        <text x="607" y="398" text-anchor="middle" fill="#fff" font-weight="700">Resena</text>
+        <text x="498" y="423"><tspan font-weight="700">PK</tspan> ResenaId INT</text>
+        <text x="498" y="443"><tspan font-weight="700">FK</tspan> ActividadId INT</text>
+        <text x="498" y="463"><tspan font-weight="700">FK</tspan> UsuarioId INT</text>
+        <text x="498" y="483">Calificacion TINYINT (1–5)</text>
+        <text x="498" y="503">Comentario NVARCHAR(500)</text>
+        <text x="498" y="521">FechaCreacion DATETIME2</text>
+
+        <!-- Relaciones -->
+        <g fill="none" stroke="#333" stroke-width="1.4">
+          <polyline points="220,64 320,64"/>
+          <polyline points="400,320 400,350 285,350 285,380"/>
+          <polyline points="500,320 500,350 615,350 615,380"/>
+          <polyline points="760,206 760,450 725,450"/>
+          <polyline points="860,206 860,555 277,555 277,506"/>
+        </g>
+        <g font-weight="700" fill="#7a1d36" font-size="12">
+          <text x="226" y="58">1</text><text x="306" y="58">N</text>
+          <text x="406" y="336">1</text><text x="291" y="374">N</text>
+          <text x="506" y="336">1</text><text x="621" y="374">N</text>
+          <text x="766" y="222">1</text><text x="731" y="444">N</text>
+          <text x="866" y="222">1</text><text x="283" y="522">N</text>
+        </g>
+        <text x="575" y="568" font-size="10.5" fill="#555">UQ (ActividadId, UsuarioId) en Inscripcion y en Resena</text>
+      </g>
+    </svg>
+    <figcaption>Figura 4. Diagrama entidad-relación actualizado de UniCampusDB.</figcaption>
+  </figure>
+
+  <h3>5.1 Entidades</h3>
+  <table>
+    <tr><th style="width:22%">Tabla</th><th>Uso</th><th style="width:34%">Relaciones</th></tr>
+    <tr><td><code>TipoActividad</code></td><td>Catálogo: Taller, Conferencia, Seminario, Curso, Encuentro, Feria.</td><td>1 tipo → N actividades</td></tr>
+    <tr><td><code>ActividadAcademica</code></td><td>Entidad central con los datos del formulario.</td><td>FK a TipoActividad; 1 → N inscripciones y reseñas</td></tr>
+    <tr><td><code>Usuario</code></td><td>Administradores y estudiantes (rol), con contraseña en hash + salt.</td><td>1 usuario → N inscripciones y reseñas</td></tr>
+    <tr><td><code>Inscripcion</code></td><td>Relaciona estudiantes con actividades; estado Activa/Cancelada.</td><td>FK a Actividad y Usuario</td></tr>
+    <tr><td><code>Resena</code></td><td>Calificación 1–5 y comentario de un estudiante sobre una actividad.</td><td>FK a Actividad y Usuario</td></tr>
+  </table>
+
+  <h3>5.2 Restricciones de integridad</h3>
+  <table>
+    <tr><th style="width:38%">Restricción</th><th>Regla</th></tr>
+    <tr><td><code>CK_Actividad_Cupos</code></td><td>Cupos entre 1 y 500.</td></tr>
+    <tr><td><code>CK_Actividad_Fechas</code> / <code>CK_Actividad_Horas</code></td><td>FechaFin ≥ FechaInicio; HoraFin &gt; HoraInicio.</td></tr>
+    <tr><td><code>CK_Actividad_Modalidad</code> / <code>CK_Actividad_Estado</code></td><td>Valores permitidos: Presencial/Virtual/Híbrida; Activa/Próxima/Finalizada/Cancelada.</td></tr>
+    <tr><td><code>UQ_Actividad_Titulo_Fecha</code></td><td>No se repite el mismo título en la misma fecha de inicio.</td></tr>
+    <tr><td><code>UQ_Inscripcion_Actividad_Usuario</code></td><td>Una persona no puede inscribirse dos veces en la misma actividad.</td></tr>
+    <tr><td><code>CK_Resena_Calificacion</code> / <code>UQ_Resena_Actividad_Usuario</code></td><td>Calificación de 1 a 5; una reseña por persona y actividad.</td></tr>
+    <tr><td><code>CK_Usuario_Rol</code> / <code>UQ_Usuario_Correo</code></td><td>Rol Administrador o Estudiante; correo único.</td></tr>
+  </table>
+
+  <h3>5.3 Control de cupos con solicitudes simultáneas</h3>
+  <p><code>InscripcionRepository.Inscribir</code> ejecuta toda la inscripción dentro de una <strong>transacción serializable</strong>.
+  Primero bloquea la fila de la actividad con <code>WITH (UPDLOCK, ROWLOCK)</code>; así, si dos estudiantes intentan tomar el
+  último cupo al mismo tiempo, la segunda solicitud espera a que termine la primera y, al contar de nuevo los inscritos,
+  recibe "sin cupos". Si algo falla se hace <code>Rollback</code>.</p>
+<pre>using (var tx = cn.BeginTransaction(IsolationLevel.Serializable))
+{
+    // 1. Bloquear la actividad y leer su cupo
+    "SELECT Cupos FROM dbo.ActividadAcademica WITH (UPDLOCK, ROWLOCK) WHERE ActividadId = @A;"
+    // 2. ¿Ya está inscrito?   3. ¿Quedan cupos?   (si no → tx.Rollback())
+    // 4. INSERT INTO dbo.Inscripcion (ActividadId, UsuarioId) VALUES (@A, @U);
+    tx.Commit();
+}</pre>
+
+  <h3>5.4 Script reproducible</h3>
+  <p><code>Database/03_BaseDatos.sql</code> crea la base si no existe, elimina y vuelve a crear las tablas en orden de dependencias,
+  define claves, restricciones e índices, y carga datos de prueba ficticios: 6 tipos, 9 usuarios, 12 actividades,
+  26 inscripciones y 7 reseñas. Ejecutarlo varias veces deja siempre el mismo estado.</p>
+</section>
+
+<!-- ============================ 6. SEGURIDAD ============================ -->
+<section class="seccion">
+  <h2>6. Validaciones y seguridad</h2>
+  <table>
+    <tr><th style="width:30%">Aspecto</th><th>Implementación</th></tr>
+    <tr><td>Validación en el servidor</td><td>Todas las reglas se validan en la BLL (<code>ActividadService.Validar</code>, <code>InscripcionService</code>,
+      <code>ResenaService</code>). Las validaciones del navegador son solo una ayuda; si se omiten, el servidor rechaza los datos igualmente.</td></tr>
+    <tr><td>Doble barrera</td><td>Las reglas críticas (cupos, fechas, duplicados, calificación) también existen como restricciones en SQL Server.</td></tr>
+    <tr><td>SQL parametrizado</td><td>Todas las consultas usan <code>SqlParameter</code> con tipo y tamaño. No se concatena texto del usuario en SQL.
+      La búsqueda con <code>LIKE</code> escapa los comodines (<code>Conexion.PatronLike</code>).</td></tr>
+    <tr><td>Contraseñas</td><td>Hash PBKDF2-SHA256 (10 000 iteraciones) con salt aleatorio por usuario y comparación en tiempo constante (<code>SeguridadPassword</code>).</td></tr>
+    <tr><td>Sesión y permisos</td><td>El usuario se obtiene de la sesión del servidor (<code>SesionUsuario</code>); las páginas heredan de <code>PaginaBase</code>,
+      que exige sesión iniciada. Los servicios verifican el rol antes de cada operación.</td></tr>
+    <tr><td>Errores controlados</td><td>Los Presenter capturan las excepciones, registran el detalle técnico en <code>App_Data/Logs</code> y muestran al usuario
+      un mensaje entendible sin información interna. <code>customErrors</code> redirige a <code>Error.aspx</code>.</td></tr>
+    <tr><td>Configuración</td><td>Cadena de conexión con autenticación integrada de Windows (sin usuario ni contraseña). Cookies <code>HttpOnly</code> y
+      <code>SameSite=Lax</code>; cabeceras <code>X-Content-Type-Options</code>, <code>X-Frame-Options</code> y <code>Referrer-Policy</code>.</td></tr>
+    <tr><td>Repositorio</td><td><code>.gitignore</code> excluye <code>bin</code>, <code>obj</code>, <code>.vs</code>, archivos de usuario y logs.</td></tr>
+  </table>
+
+  <h3>6.1 Reglas de negocio</h3>
+  <table>
+    <tr><th>Regla</th><th style="width:36%">Dónde se aplica</th></tr>
+    <tr><td>Campos obligatorios y longitudes</td><td><code>ActividadService.Validar</code></td></tr>
+    <tr><td>Fecha fin ≥ fecha inicio; hora fin &gt; hora inicio</td><td><code>ActividadService.Validar</code> + CHECK</td></tr>
+    <tr><td>Cupos entre 1 y 500 y nunca menores que los inscritos</td><td><code>ActividadService.Validar</code> + CHECK</td></tr>
+    <tr><td>Una actividad nueva no puede iniciar en el pasado</td><td><code>ActividadService.Validar</code></td></tr>
+    <tr><td>"Finalizada" solo si la fecha de fin ya pasó</td><td><code>ActividadService.Validar</code></td></tr>
+    <tr><td>No duplicar título + fecha de inicio</td><td><code>ActividadService.Validar</code> + UNIQUE</td></tr>
+    <tr><td>Eliminar: si tiene inscripciones o reseñas se desactiva (Cancelada)</td><td><code>ActividadService.Eliminar</code></td></tr>
+    <tr><td>Inscripción solo en actividades Activa/Próxima no terminadas</td><td><code>InscripcionService.Inscribir</code></td></tr>
+    <tr><td>Sin sobrecupo ni inscripción duplicada</td><td><code>InscripcionRepository.Inscribir</code> (transacción) + UNIQUE</td></tr>
+    <tr><td>Reseña: solo inscritos, actividad iniciada, una por persona, 1–5</td><td><code>ResenaService</code> + CHECK/UNIQUE</td></tr>
+    <tr><td>Solo el administrador gestiona actividades y ve reportes</td><td>Servicios BLL + Presenters</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 7. PRUEBAS ============================ -->
+<section class="seccion">
+  <h2>7. Pruebas funcionales y evidencias</h2>
+  <p>Las pruebas se ejecutaron el 18 de noviembre de 2026 sobre la aplicación en IIS Express (<code>http://localhost:51480</code>)
+  conectada a SQL Server LocalDB con los datos del script. Los mensajes de la columna "Resultado obtenido" son los que mostró la aplicación.</p>
+  <table>
+    <tr><th style="width:4%">#</th><th style="width:19%">Caso</th><th style="width:27%">Acción</th><th>Resultado obtenido</th><th style="width:9%">Estado</th></tr>
+    <tr><td>1</td><td>Registro válido</td><td>Guardar "Taller de Programación Web II" con todos los datos</td><td>"La actividad … se registró correctamente." Aparece en el listado y en SQL Server (Id 13).</td><td class="ok">Cumple</td></tr>
+    <tr><td>2</td><td>Campo obligatorio</td><td>Guardar sin título</td><td>"El título es obligatorio." No inserta.</td><td class="ok">Cumple</td></tr>
+    <tr><td>3</td><td>Cupo inválido</td><td>Cupos = −5</td><td>"Los cupos deben estar entre 1 y 500." No inserta.</td><td class="ok">Cumple</td></tr>
+    <tr><td>4</td><td>Fechas y horas</td><td>Fin antes del inicio; hora fin antes de hora inicio</td><td>"La fecha de fin no puede ser anterior…" y "La hora de fin debe ser posterior…".</td><td class="ok">Cumple</td></tr>
+    <tr><td>5</td><td>Búsqueda</td><td>Buscar "Programación"</td><td>2 actividades encontradas con los datos correctos.</td><td class="ok">Cumple</td></tr>
+    <tr><td>6</td><td>Filtro por estado</td><td>Estado = Finalizada</td><td>4 actividades finalizadas.</td><td class="ok">Cumple</td></tr>
+    <tr><td>7</td><td>Actualizar</td><td>Cambiar el lugar a "Laboratorio 4"</td><td>"La actividad … se actualizó correctamente."</td><td class="ok">Cumple</td></tr>
+    <tr><td>8</td><td>Eliminar con dependencias</td><td>Eliminar "Club de lectura científica"</td><td>"…tiene inscripciones o reseñas: se desactivó (estado Cancelada) en lugar de eliminarse."</td><td class="ok">Cumple</td></tr>
+    <tr><td>9</td><td>Inscripción (admin)</td><td>Inscribir a Ana Torres y Carlos Pérez (cupo 2)</td><td>"Ana Torres quedó inscrito(a) en …" (igual para Carlos).</td><td class="ok">Cumple</td></tr>
+    <tr><td>10</td><td>Cupo agotado</td><td>Inscribir a un tercer estudiante</td><td>"No hay cupos disponibles en …" No inscribe.</td><td class="ok">Cumple</td></tr>
+    <tr><td>11</td><td>Cupo agotado (estudiante)</td><td>María ve la actividad llena</td><td>"No quedan cupos disponibles." y no aparece el botón Inscribirme.</td><td class="ok">Cumple</td></tr>
+    <tr><td>12</td><td>Autoinscripción</td><td>María se inscribe en "Conferencia de IA"</td><td>"María López quedó inscrito(a) en …"; después: "Ya estás inscrito(a) en esta actividad."</td><td class="ok">Cumple</td></tr>
+    <tr><td>13</td><td>Reseña inválida</td><td>Publicar sin calificación ni comentario</td><td>"La calificación debe ser un valor entre 1 y 5…" y "El comentario debe tener entre 10 y 500 caracteres."</td><td class="ok">Cumple</td></tr>
+    <tr><td>14</td><td>Reseña válida</td><td>5 estrellas y comentario en actividad cursada</td><td>"¡Gracias! Su reseña … fue publicada."</td><td class="ok">Cumple</td></tr>
+    <tr><td>15</td><td>Reseña sin inscripción</td><td>Ver "Seminario de ética profesional"</td><td>"Solo los estudiantes inscritos pueden reseñar esta actividad."</td><td class="ok">Cumple</td></tr>
+    <tr><td>16</td><td>Permisos</td><td>Estudiante abre Reportes</td><td>"Los reportes están disponibles solo para la coordinación académica."</td><td class="ok">Cumple</td></tr>
+    <tr><td>17</td><td>Inicio de sesión fallido</td><td>Correo o contraseña incorrectos</td><td>"Correo o contraseña incorrectos." No inicia sesión.</td><td class="ok">Cumple</td></tr>
+    <tr><td>18</td><td>Restricciones en BD</td><td>Insertar directamente en SQL datos inválidos</td><td>SQL Server rechaza duplicados y cupos fuera de rango (ver sección 8).</td><td class="ok">Cumple</td></tr>
+  </table>
+
+  <h3>7.1 Inicio de sesión</h3>
+  <figure><img class="media" src="../capturas/01_login.jpg"><figcaption>Figura 5. Pantalla de inicio de sesión.</figcaption></figure>
+  <figure><img class="media" src="../capturas/02_login_error.jpg"><figcaption>Figura 6. Caso 17: credenciales incorrectas.</figcaption></figure>
+  <figure><img src="../capturas/03_inicio_admin.jpg"><figcaption>Figura 7. Inicio del administrador con indicadores y próximas actividades.</figcaption></figure>
+
+  <h3>7.2 Registro y validaciones</h3>
+  <figure><img src="../capturas/08_form_completo.jpg"><figcaption>Figura 8. Caso 1: formulario completo antes de guardar.</figcaption></figure>
+  <figure><img src="../capturas/09_guardado_ok.jpg"><figcaption>Figura 9. Caso 1: mensaje de registro exitoso.</figcaption></figure>
+  <figure><img class="media" src="../capturas/10_detalle.jpg"><figcaption>Figura 10. Detalle de la actividad registrada.</figcaption></figure>
+  <figure><img src="../capturas/05_val_sin_titulo.jpg"><figcaption>Figura 11. Caso 2: guardar sin título.</figcaption></figure>
+  <figure><img src="../capturas/06_val_cupo.jpg"><figcaption>Figura 12. Caso 3: cupo negativo.</figcaption></figure>
+  <figure><img src="../capturas/07_val_fechas.jpg"><figcaption>Figura 13. Caso 4: fechas y horas inválidas.</figcaption></figure>
+
+  <h3>7.3 Listado, búsqueda, filtros, edición y eliminación</h3>
+  <figure><img src="../capturas/14_busqueda.jpg"><figcaption>Figura 14. Caso 5: búsqueda por texto.</figcaption></figure>
+  <figure><img src="../capturas/15_filtro_estado.jpg"><figcaption>Figura 15. Caso 6: filtro por estado Finalizada.</figcaption></figure>
+  <figure><img src="../capturas/16_actualizado.jpg"><figcaption>Figura 16. Caso 7: actualización de la actividad.</figcaption></figure>
+  <figure><img src="../capturas/17_eliminar_desactiva.jpg"><figcaption>Figura 17. Caso 8: eliminar una actividad con inscripciones la desactiva.</figcaption></figure>
+
+  <h3>7.4 Inscripciones y cupos</h3>
+  <figure><img src="../capturas/11_inscripcion_ok.jpg"><figcaption>Figura 18. Caso 9: inscripción realizada por el administrador.</figcaption></figure>
+  <figure><img src="../capturas/12_cupo_agotado.jpg"><figcaption>Figura 19. Caso 10: intento de inscripción con cupo agotado.</figcaption></figure>
+  <figure><img class="chica" src="../capturas/13_inscritos.jpg"><figcaption>Figura 20. Estudiantes inscritos (2 de 2 cupos).</figcaption></figure>
+  <figure><img class="chica" src="../capturas/20_estudiante_sin_cupos.jpg"><figcaption>Figura 21. Caso 11: el estudiante ve que no quedan cupos.</figcaption></figure>
+  <figure><img src="../capturas/19_inicio_estudiante.jpg"><figcaption>Figura 22. Inicio del estudiante.</figcaption></figure>
+  <figure><img class="chica" src="../capturas/21_estudiante_vista_previa.jpg"><figcaption>Figura 23. Vista del estudiante antes de inscribirse.</figcaption></figure>
+  <figure><img src="../capturas/22_autoinscripcion_ok.jpg"><figcaption>Figura 24. Caso 12: autoinscripción exitosa.</figcaption></figure>
+  <figure><img class="chica" src="../capturas/23_ya_inscrito.jpg"><figcaption>Figura 25. Caso 12: después de inscribirse no puede repetir la inscripción.</figcaption></figure>
+
+  <h3>7.5 Reseñas, permisos y vistas del estudiante</h3>
+  <figure><img src="../capturas/24_resena_invalida.jpg"><figcaption>Figura 26. Caso 13: reseña sin calificación ni comentario.</figcaption></figure>
+  <figure><img class="media" src="../capturas/25_resena_ok.jpg"><figcaption>Figura 27. Caso 14: reseña publicada.</figcaption></figure>
+  <figure><img class="media" src="../capturas/26_resena_no_inscrito.jpg"><figcaption>Figura 28. Caso 15: no puede reseñar sin estar inscrito.</figcaption></figure>
+  <figure><img src="../capturas/27_reportes_denegado.jpg"><figcaption>Figura 29. Caso 16: un estudiante no puede ver los reportes.</figcaption></figure>
+  <figure><img class="media" src="../capturas/28_mis_inscripciones.jpg"><figcaption>Figura 30. Mis inscripciones del estudiante.</figcaption></figure>
+  <figure><img class="media" src="../capturas/18_reportes.jpg"><figcaption>Figura 31. Reportes del administrador.</figcaption></figure>
+</section>
+
+<!-- ============================ 8. SQL SERVER ============================ -->
+<section class="seccion">
+  <h2>8. Evidencias en SQL Server</h2>
+  <h3>8.1 Registro guardado desde la aplicación (caso 1)</h3>
+<pre>SELECT a.ActividadId, a.Titulo, t.Nombre AS Tipo, a.FechaInicio, a.FechaFin,
+       a.HoraInicio, a.HoraFin, a.Modalidad, a.Lugar, a.Cupos, a.Estado
+FROM ActividadAcademica a JOIN TipoActividad t ON t.TipoId = a.TipoId
+WHERE a.Titulo LIKE N'%Web II%';
+
+ActividadId Titulo                        Tipo   FechaInicio FechaFin   HoraInicio HoraFin Modalidad  Lugar         Cupos Estado
+----------- ----------------------------- ------ ----------- ---------- ---------- ------- ---------- ------------- ----- -------
+13          Taller de Programación Web II Taller 2026-12-14  2026-12-15 08:00      12:00   Presencial Laboratorio 4 2     Próxima</pre>
+
+  <h3>8.2 Inscripciones, desactivación y reseña</h3>
+<pre>InscripcionId Nombre       FechaInscripcion     Estado      (actividad 13)
+------------- ------------ -------------------- ------
+27            Ana Torres   2026-11-18 15:19:12  Activa
+28            Carlos Pérez 2026-11-18 15:19:15  Activa
+
+ActividadId Titulo                     Estado
+----------- -------------------------- ---------
+12          Club de lectura científica Cancelada
+
+ResenaId Nombre      Titulo                     Calificacion Comentario
+-------- ----------- -------------------------- ------------ ---------------------------------------------------------
+8        María López Encuentro de Investigación 5            Muy buena jornada; conocí los semilleros y sus proyectos.</pre>
+
+  <h3>8.3 Restricciones probadas directamente en la base (caso 18)</h3>
+<pre>INSERT INTO Inscripcion(ActividadId, UsuarioId) VALUES (1, 3);
+  → Violation of UNIQUE KEY constraint 'UQ_Inscripcion_Actividad_Usuario'.
+
+UPDATE ActividadAcademica SET Cupos = 0 WHERE ActividadId = 1;
+  → The UPDATE statement conflicted with the CHECK constraint "CK_Actividad_Cupos".
+
+INSERT INTO Resena(ActividadId, UsuarioId, Calificacion, Comentario) VALUES (5, 2, 6, N'x');
+  → Violation of UNIQUE KEY constraint 'UQ_Resena_Actividad_Usuario'.</pre>
+  <p>Cada prueba se ejecutó dentro de una transacción con <code>ROLLBACK</code>, por lo que no alteró los datos.</p>
+
+  <h3>8.4 Diseño de la tabla y datos en Visual Studio</h3>
+  <figure><img src="../capturas/bd-disenador-tabla.jpg"><figcaption>Figura 32. Diseñador de la tabla ActividadAcademica con claves y restricciones.</figcaption></figure>
+  <figure><img src="../capturas/bd-datos-actividades.jpg"><figcaption>Figura 33. Consulta de actividades e inscritos (Database/04_ConsultaDatos.sql).</figcaption></figure>
+</section>
+
+<!-- ============================ 9. GITHUB ============================ -->
+<section class="seccion">
+  <h2>9. Repositorio GitHub y colaboración</h2>
+  <p><strong>Enlace del repositorio:</strong> <span class="pendiente">https://github.com/USUARIO/REPOSITORIO (completar)</span></p>
+  <ul>
+    <li>Todos los integrantes están agregados como colaboradores del repositorio.</li>
+    <li>Se trabaja con una rama por funcionalidad (<code>feature/...</code>) y pull requests hacia <code>main</code>.</li>
+    <li>Convención de commits: <code>feat:</code> nuevas funciones, <code>fix:</code> correcciones, <code>docs:</code> documentación.</li>
+    <li>El <code>.gitignore</code> excluye <code>bin</code>, <code>obj</code>, <code>.vs</code>, archivos <code>*.user</code> y los logs de <code>App_Data/Logs</code>; no se suben contraseñas ni cadenas de conexión con credenciales.</li>
+  </ul>
+  <h3>9.1 Aportes por integrante</h3>
+  <table>
+    <tr><th style="width:28%">Integrante</th><th>Aporte (archivos / funcionalidades)</th><th style="width:22%">Commits representativos</th></tr>
+    <tr><td>Adrian Carmona</td><td><span class="pendiente">(completar)</span></td><td><span class="pendiente">(completar)</span></td></tr>
+    <tr><td>Luis Fuentes</td><td><span class="pendiente">(completar)</span></td><td><span class="pendiente">(completar)</span></td></tr>
+    <tr><td>Rafael Acevedo</td><td><span class="pendiente">(completar)</span></td><td><span class="pendiente">(completar)</span></td></tr>
+    <tr><td>Samuel Henriquez</td><td><span class="pendiente">(completar)</span></td><td><span class="pendiente">(completar)</span></td></tr>
+  </table>
+  <div class="nota">Sugerencia: añadir aquí una captura de la pestaña <em>Insights → Contributors</em> o del historial de commits de GitHub
+  donde se vea la participación de cada integrante.</div>
+
+  <!-- ============================ 10. EJECUCIÓN ============================ -->
+  <h2 style="margin-top:18pt">10. Instrucciones de instalación y ejecución</h2>
+  <h3>10.1 Requisitos</h3>
+  <ul>
+    <li>Visual Studio 2022 o superior con la carga de trabajo <em>Desarrollo de ASP.NET y web</em> (incluye IIS Express y .NET Framework 4.8).</li>
+    <li>SQL Server LocalDB (incluido con Visual Studio) o SQL Server Express/Developer.</li>
+    <li>SQL Server Management Studio o el Explorador de objetos de SQL Server de Visual Studio.</li>
+  </ul>
+  <h3>10.2 Pasos</h3>
+  <ol>
+    <li>Clonar el repositorio o descomprimir <code>02_Solucion_VisualStudio.zip</code>.</li>
+    <li>Conectarse a <code>(localdb)\MSSQLLocalDB</code> y ejecutar completo <code>03_BaseDatos.sql</code>.</li>
+    <li>Si usa SQL Server Express, cambiar <code>Data Source</code> por <code>.\SQLEXPRESS</code> en <code>UniCampus.Web/Web.config</code>.</li>
+    <li>Abrir <code>UniCampus.sln</code>, establecer <code>UniCampus.Web</code> como proyecto de inicio y compilar (Ctrl+Mayús+B).</li>
+    <li>Ejecutar con F5. La aplicación abre en <code>http://localhost:51480/</code>.</li>
+    <li>Ingresar con un usuario de prueba (tabla siguiente).</li>
+  </ol>
+  <table>
+    <tr><th>Rol</th><th>Correo</th><th>Contraseña (datos ficticios de prueba)</th></tr>
+    <tr><td>Administrador</td><td>admin@unicampus.edu</td><td>Admin123*</td></tr>
+    <tr><td>Estudiante</td><td>maria.lopez@unicampus.edu</td><td>Estudiante123*</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 11. CONCLUSIONES ============================ -->
+<section class="seccion">
+  <h2>11. Conclusiones</h2>
+  <ul>
+    <li>Separar la solución en presentación, negocio y datos permitió que cada parte tenga una sola responsabilidad: las páginas
+      ya no contienen SQL y las reglas de negocio están en un único lugar, lo que facilita probarlas y modificarlas.</li>
+    <li>El patrón MVP dejó las páginas <code>.aspx</code> enfocadas en mostrar información; la lógica de coordinación vive en los Presenter,
+      que dependen de una interfaz de vista y no de controles concretos.</li>
+    <li>Validar en el servidor y repetir las reglas críticas como restricciones de SQL Server crea dos barreras: aunque se salte la
+      interfaz, los datos inválidos no llegan a la base.</li>
+    <li>Las consultas parametrizadas eliminan el riesgo de inyección SQL, y la transacción con bloqueo de fila resuelve el problema de
+      sobrecupo cuando varias personas se inscriben a la vez.</li>
+    <li>Reutilizar el modelo entidad-relación existente y ampliarlo solo con las tablas necesarias (inscripciones y reseñas) evitó
+      duplicar entidades y mantuvo la coherencia con el trabajo de los cortes anteriores.</li>
+    <li>El uso de Git y GitHub con ramas, commits descriptivos y un README completo permite que cualquier persona descargue, configure y
+      ejecute el proyecto siguiendo las instrucciones.</li>
+  </ul>
+  <h3>Trabajo futuro</h3>
+  <ul>
+    <li>Publicar la aplicación en un servidor IIS con una base de datos accesible (milla extra opcional).</li>
+    <li>Agregar pruebas unitarias automatizadas para los servicios de la capa de negocio.</li>
+    <li>Notificar por correo a los estudiantes cuando se modifique o cancele una actividad.</li>
+  </ul>
+</section>
+
+</body>
+</html>
