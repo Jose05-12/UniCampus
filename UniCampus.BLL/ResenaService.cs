@@ -5,10 +5,6 @@ using UniCampus.Entities;
 
 namespace UniCampus.BLL
 {
-    /// <summary>
-    /// Reglas de reseñas: solo estudiantes inscritos, una reseña por actividad,
-    /// calificación 1-5 y comentario con longitud controlada.
-    /// </summary>
     public class ResenaService
     {
         public const int ComentarioMinimo = 10;
@@ -35,9 +31,6 @@ namespace UniCampus.BLL
             return _resenas.ListarPorUsuario(usuarioId);
         }
 
-        /// <summary>
-        /// Devuelve null si el usuario puede reseñar la actividad; si no, el motivo.
-        /// </summary>
         public string MotivoNoPuedeResenar(Actividad actividad, Usuario usuario)
         {
             if (usuario == null) return "Debe iniciar sesión para reseñar.";

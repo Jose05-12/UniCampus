@@ -50,9 +50,6 @@ namespace UniCampus.DAL
             }
         }
 
-        /// <summary>
-        /// Estudiantes activos que todavía no tienen una inscripción activa en la actividad.
-        /// </summary>
         public List<Usuario> ListarEstudiantesNoInscritos(int actividadId)
         {
             const string sql = @"

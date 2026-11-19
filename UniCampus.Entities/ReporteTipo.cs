@@ -1,6 +1,5 @@
 ﻿namespace UniCampus.Entities
 {
-    /// <summary>Resumen de actividades e inscripciones agrupado por tipo.</summary>
     public class ReporteTipo
     {
         public string Tipo { get; set; }

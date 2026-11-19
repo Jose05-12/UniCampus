@@ -4,9 +4,6 @@ using UniCampus.Entities;
 
 namespace UniCampus.Web.Infraestructura
 {
-    /// <summary>
-    /// Página base para todas las páginas que requieren sesión iniciada.
-    /// </summary>
     public abstract class PaginaBase : Page
     {
         public Usuario UsuarioActual
@@ -27,12 +24,10 @@ namespace UniCampus.Web.Infraestructura
                 return;
             }
 
-            // Vincula el ViewState a la sesión para mitigar ataques CSRF.
             ViewStateUserKey = Session.SessionID;
             base.OnInit(e);
         }
 
-        /// <summary>Clase CSS de la etiqueta de estado de una actividad.</summary>
         protected string ClaseEstado(object estado)
         {
             switch (Convert.ToString(estado))
@@ -47,7 +42,6 @@ namespace UniCampus.Web.Infraestructura
 
         private static readonly System.Globalization.CultureInfo Espanol = new System.Globalization.CultureInfo("es-CO");
 
-        /// <summary>Mes abreviado en español sin punto final (p. ej. "nov").</summary>
         protected string Mes(object fecha)
         {
             if (!(fecha is DateTime)) return "";
@@ -59,7 +53,6 @@ namespace UniCampus.Web.Infraestructura
             return fecha is DateTime ? ((DateTime)fecha).ToString("dd") : "";
         }
 
-        /// <summary>Hasta dos iniciales del nombre, para los avatares.</summary>
         protected string Iniciales(object nombre)
         {
             var partes = Convert.ToString(nombre).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);

@@ -1,8 +1,5 @@
 ﻿namespace UniCampus.Entities
 {
-    /// <summary>
-    /// Valores permitidos que coinciden con las restricciones CHECK de la base de datos.
-    /// </summary>
     public static class EstadosActividad
     {
         public const string Activa = "Activa";

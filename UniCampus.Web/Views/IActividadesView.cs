@@ -3,15 +3,10 @@ using UniCampus.Entities;
 
 namespace UniCampus.Web.Views
 {
-    /// <summary>
-    /// Contrato de la vista Actividades.aspx. Describe lo que el Presenter puede leer
-    /// y pedirle a la página, sin conocer los controles ASP.NET concretos.
-    /// </summary>
     public interface IActividadesView
     {
         Usuario UsuarioActual { get; }
 
-        // ---- Formulario de registro / edición (valores tal como los escribió el usuario) ----
         int ActividadEnEdicionId { get; set; }
         string Titulo { get; set; }
         string TipoId { get; set; }
@@ -25,13 +20,11 @@ namespace UniCampus.Web.Views
         string Cupos { get; set; }
         string Estado { get; set; }
 
-        // ---- Filtros del listado ----
         string FiltroTexto { get; }
         string FiltroTipoId { get; }
         string FiltroEstado { get; }
         string FiltroFecha { get; }
 
-        // ---- Selección e interacción con la actividad elegida ----
         int ActividadSeleccionadaId { get; set; }
         string EstudianteAInscribirId { get; }
         string ResenaCalificacion { get; }

@@ -1,6 +1,5 @@
 ﻿namespace UniCampus.Entities
 {
-    /// <summary>Indicadores que se muestran en las tarjetas del encabezado.</summary>
     public class ResumenActividades
     {
         public int TotalActividades { get; set; }

@@ -6,10 +6,6 @@ using UniCampus.Entities;
 
 namespace UniCampus.DAL
 {
-    /// <summary>
-    /// Acceso a datos de dbo.ActividadAcademica con ADO.NET.
-    /// Todas las consultas son parametrizadas; nunca se concatena texto del usuario.
-    /// </summary>
     public class ActividadRepository
     {
         private const string SelectBase = @"
@@ -144,9 +140,6 @@ namespace UniCampus.DAL
             }
         }
 
-        /// <summary>
-        /// Indica si ya existe otra actividad con el mismo título y fecha de inicio.
-        /// </summary>
         public bool ExisteDuplicado(string titulo, DateTime fechaInicio, int excluirActividadId)
         {
             const string sql = @"
@@ -164,9 +157,6 @@ namespace UniCampus.DAL
             }
         }
 
-        /// <summary>
-        /// Cuenta inscripciones (de cualquier estado) y reseñas asociadas a la actividad.
-        /// </summary>
         public int ContarDependencias(int actividadId)
         {
             const string sql = @"

@@ -14,10 +14,6 @@ namespace UniCampus.BLL
             _usuarios = new UsuarioRepository();
         }
 
-        /// <summary>
-        /// Verifica las credenciales. Devuelve el mismo mensaje para correo inexistente o
-        /// contraseña errónea, así no se revela qué correos están registrados.
-        /// </summary>
         public ResultadoOperacion IniciarSesion(string correo, string password, out Usuario usuario)
         {
             usuario = null;

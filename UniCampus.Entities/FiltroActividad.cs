@@ -2,9 +2,6 @@
 
 namespace UniCampus.Entities
 {
-    /// <summary>
-    /// Criterios de búsqueda del listado. Un valor null significa "sin filtro".
-    /// </summary>
     public class FiltroActividad
     {
         public string Texto { get; set; }

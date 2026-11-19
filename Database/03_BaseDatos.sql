@@ -7,7 +7,6 @@ GO
 USE UniCampusDB;
 GO
 
-/* ---------- Limpieza (orden inverso a las dependencias) ---------- */
 IF OBJECT_ID(N'dbo.Resena', N'U') IS NOT NULL DROP TABLE dbo.Resena;
 IF OBJECT_ID(N'dbo.Inscripcion', N'U') IS NOT NULL DROP TABLE dbo.Inscripcion;
 IF OBJECT_ID(N'dbo.ActividadAcademica', N'U') IS NOT NULL DROP TABLE dbo.ActividadAcademica;
@@ -90,7 +89,6 @@ CREATE INDEX IX_Inscripcion_Usuario ON dbo.Inscripcion(UsuarioId);
 CREATE INDEX IX_Resena_Actividad ON dbo.Resena(ActividadId);
 GO
 
-/* ---------- Datos de prueba (ficticios) ---------- */
 SET IDENTITY_INSERT dbo.TipoActividad ON;
 INSERT INTO dbo.TipoActividad (TipoId, Nombre, Descripcion) VALUES
 (1, N'Taller',      N'Sesión práctica guiada.'),
@@ -135,39 +133,30 @@ SET IDENTITY_INSERT dbo.ActividadAcademica OFF;
 GO
 
 INSERT INTO dbo.Inscripcion (ActividadId, UsuarioId, FechaInscripcion, Estado) VALUES
--- Taller de Programación Web (27 de 30 cupos disponibles)
 (1, 3, '2026-10-28T10:00:00', N'Activa'),
 (1, 4, '2026-10-29T11:30:00', N'Activa'),
 (1, 5, '2026-10-30T09:15:00', N'Activa'),
--- Conferencia de IA
 (2, 6, '2026-10-20T08:00:00', N'Activa'),
 (2, 7, '2026-10-21T08:00:00', N'Activa'),
 (2, 8, '2026-10-22T08:00:00', N'Activa'),
 (2, 9, '2026-10-23T08:00:00', N'Activa'),
 (2, 3, '2026-10-24T08:00:00', N'Activa'),
--- Seminario de Bases de Datos
 (3, 3, '2026-11-01T14:00:00', N'Activa'),
 (3, 2, '2026-11-02T14:00:00', N'Activa'),
--- Encuentro de Investigación (finalizada)
 (5, 2, '2026-10-01T09:00:00', N'Activa'),
 (5, 3, '2026-10-01T10:00:00', N'Activa'),
 (5, 8, '2026-10-02T10:00:00', N'Activa'),
 (5, 9, '2026-10-03T10:00:00', N'Activa'),
--- Taller de seguridad digital
 (7, 2, '2026-10-25T16:00:00', N'Activa'),
 (7, 5, '2026-10-26T16:00:00', N'Activa'),
--- Curso de Python
 (8, 8, '2026-10-30T19:00:00', N'Activa'),
 (8, 4, '2026-10-31T19:00:00', N'Activa'),
--- Conferencia de emprendimiento (finalizada)
 (9, 2, '2026-09-30T10:00:00', N'Activa'),
 (9, 4, '2026-09-30T11:00:00', N'Activa'),
 (9, 5, '2026-10-01T11:00:00', N'Activa'),
--- Taller de Git y GitHub (cupo lleno: 3 de 3)
 (11, 3, '2026-11-01T08:00:00', N'Activa'),
 (11, 6, '2026-11-01T09:00:00', N'Activa'),
 (11, 7, '2026-11-02T09:00:00', N'Activa'),
--- Club de lectura (finalizada)
 (12, 9, '2026-08-10T10:00:00', N'Activa'),
 (12, 7, '2026-08-11T10:00:00', N'Activa');
 GO
@@ -181,7 +170,6 @@ INSERT INTO dbo.Resena (ActividadId, UsuarioId, Calificacion, Comentario, FechaC
 (7,  5, 5, N'Aprendí a configurar la verificación en dos pasos en todas mis cuentas.', '2026-11-04T18:00:00'),
 (12, 7, 4, N'Buena selección de artículos y discusión enriquecedora.', '2026-08-21T10:00:00');
 GO
-
 
 SELECT a.ActividadId, a.Titulo, a.Estado, a.Cupos,
        (SELECT COUNT(1) FROM dbo.Inscripcion i WHERE i.ActividadId = a.ActividadId AND i.Estado = N'Activa') AS Inscritos

@@ -58,11 +58,6 @@ namespace UniCampus.DAL
             }
         }
 
-        /// <summary>
-        /// Registra la inscripción dentro de una transacción. El bloqueo UPDLOCK sobre la
-        /// fila de la actividad hace que dos solicitudes simultáneas se atiendan una tras
-        /// otra, por lo que nunca se supera el cupo ni se duplica la inscripción.
-        /// </summary>
         public ResultadoInscripcion Inscribir(int actividadId, int usuarioId)
         {
             using (var cn = Conexion.Crear())
@@ -72,7 +67,6 @@ namespace UniCampus.DAL
                 {
                     try
                     {
-                        // 1. Bloquear la actividad y leer su cupo.
                         int cupos;
                         using (var cmd = new SqlCommand(
                             "SELECT Cupos FROM dbo.ActividadAcademica WITH (UPDLOCK, ROWLOCK) WHERE ActividadId = @A;", cn, tx))
@@ -87,7 +81,6 @@ namespace UniCampus.DAL
                             cupos = (int)valor;
                         }
 
-                        // 2. ¿Existe ya un registro de este usuario para la actividad?
                         int? inscripcionExistente = null;
                         string estadoExistente = null;
                         using (var cmd = new SqlCommand(
@@ -111,7 +104,6 @@ namespace UniCampus.DAL
                             return ResultadoInscripcion.YaInscrito;
                         }
 
-                        // 3. Verificar cupos disponibles.
                         int inscritos;
                         using (var cmd = new SqlCommand(
                             "SELECT COUNT(1) FROM dbo.Inscripcion WHERE ActividadId = @A AND Estado = N'Activa';", cn, tx))
@@ -126,7 +118,6 @@ namespace UniCampus.DAL
                             return ResultadoInscripcion.SinCupos;
                         }
 
-                        // 4. Guardar (reactivar si estaba cancelada, o insertar).
                         string sql = inscripcionExistente.HasValue
                             ? "UPDATE dbo.Inscripcion SET Estado = N'Activa', FechaInscripcion = SYSDATETIME() WHERE InscripcionId = @Id;"
                             : "INSERT INTO dbo.Inscripcion (ActividadId, UsuarioId) VALUES (@A, @U);";

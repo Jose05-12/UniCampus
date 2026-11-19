@@ -2,10 +2,6 @@
 
 namespace UniCampus.Entities
 {
-    /// <summary>
-    /// Respuesta que la capa de negocio devuelve a la presentación:
-    /// indica si la operación fue exitosa y qué mensajes mostrar.
-    /// </summary>
     public class ResultadoOperacion
     {
         public bool Exitoso { get; private set; }

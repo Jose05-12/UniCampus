@@ -10,7 +10,6 @@ namespace UniCampus.Entities
         public DateTime FechaInscripcion { get; set; }
         public string Estado { get; set; }
 
-        // Datos de apoyo para mostrar en pantalla (vienen de JOIN).
         public string NombreEstudiante { get; set; }
         public string Programa { get; set; }
         public string TituloActividad { get; set; }

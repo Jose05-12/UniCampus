@@ -9,11 +9,6 @@ using UniCampus.Web.Views;
 
 namespace UniCampus.Web.Presenters
 {
-    /// <summary>
-    /// Coordina la vista de actividades: recibe las acciones de la página,
-    /// convierte los datos del formulario, llama a la capa de negocio y
-    /// le indica a la vista qué mostrar. No contiene SQL ni controles ASP.NET.
-    /// </summary>
     public class ActividadesPresenter
     {
         private const string MensajeErrorGeneral = "Ocurrió un error inesperado. Intente nuevamente o contacte al administrador.";
@@ -36,8 +31,6 @@ namespace UniCampus.Web.Presenters
             get { return _view.UsuarioActual; }
         }
 
-        // ------------------------------------------------------------------ Carga
-
         public void Inicializar()
         {
             Ejecutar("cargar la página", () =>
@@ -55,14 +48,12 @@ namespace UniCampus.Web.Presenters
             Ejecutar("buscar actividades", CargarListado);
         }
 
-        /// <summary>Recarga indicadores, listado y paneles de la actividad seleccionada.</summary>
         private void CargarListado()
         {
             _view.MostrarResumen(_actividades.ObtenerResumen());
 
             var actividades = _actividades.Listar(ConstruirFiltro());
 
-            // La selección se decide antes de dibujar el listado para resaltar la fila correcta.
             if (_view.ActividadSeleccionadaId == 0 && actividades.Count > 0)
             {
                 _view.ActividadSeleccionadaId = actividades[0].ActividadId;
@@ -113,8 +104,6 @@ namespace UniCampus.Web.Presenters
             return "No es posible inscribirse en esta actividad.";
         }
 
-        // ------------------------------------------------------------------ Formulario
-
         public void Guardar()
         {
             Ejecutar("guardar la actividad", () =>
@@ -150,7 +139,6 @@ namespace UniCampus.Web.Presenters
             _view.MostrarModoEdicion(enEdicion > 0);
         }
 
-        /// <summary>Abre el formulario vacío para registrar una actividad (solo administrador).</summary>
         public void NuevaActividad()
         {
             if (!Usuario.EsAdministrador)
@@ -237,8 +225,6 @@ namespace UniCampus.Web.Presenters
             });
         }
 
-        // ------------------------------------------------------------------ Inscripciones
-
         public void InscribirEstudiante()
         {
             Ejecutar("inscribir al estudiante", () =>
@@ -265,8 +251,6 @@ namespace UniCampus.Web.Presenters
                 MostrarResultado(_inscripciones.Cancelar(inscripcionId, Usuario)));
         }
 
-        // ------------------------------------------------------------------ Reseñas
-
         public void PublicarResena()
         {
             Ejecutar("publicar la reseña", () =>
@@ -284,8 +268,6 @@ namespace UniCampus.Web.Presenters
         {
             Ejecutar("eliminar la reseña", () => MostrarResultado(_resenas.Eliminar(resenaId, Usuario)));
         }
-
-        // ------------------------------------------------------------------ Apoyo
 
         private void MostrarResultado(ResultadoOperacion resultado)
         {
@@ -314,11 +296,6 @@ namespace UniCampus.Web.Presenters
             _view.MostrarModoEdicion(false);
         }
 
-        /// <summary>
-        /// Convierte el texto del formulario en una entidad. Los campos vacíos quedan con su
-        /// valor por defecto para que la capa de negocio informe que son obligatorios; aquí
-        /// solo se reportan valores con formato inválido.
-        /// </summary>
         private Actividad LeerFormulario(List<string> errores)
         {
             var a = new Actividad
@@ -402,10 +379,6 @@ namespace UniCampus.Web.Presenters
             return filtro;
         }
 
-        /// <summary>
-        /// Ejecuta una acción controlando errores: registra el detalle técnico y muestra
-        /// al usuario un mensaje entendible sin revelar información interna.
-        /// </summary>
         private void Ejecutar(string accion, Action operacion)
         {
             try

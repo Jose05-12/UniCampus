@@ -3,10 +3,6 @@ using UniCampus.Entities;
 
 namespace UniCampus.Web.Infraestructura
 {
-    /// <summary>
-    /// Guarda el usuario autenticado en la sesión del servidor.
-    /// El Id del usuario nunca se toma de un control de la página.
-    /// </summary>
     public static class SesionUsuario
     {
         private const string Clave = "UniCampus.UsuarioActual";

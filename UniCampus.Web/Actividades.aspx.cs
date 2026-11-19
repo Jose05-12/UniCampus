@@ -10,9 +10,6 @@ using UniCampus.Web.Views;
 
 namespace UniCampus.Web
 {
-    /// <summary>
-    /// Vista (MVP): solo lee/escribe controles y delega cada acción en el Presenter.
-    /// </summary>
     public partial class Actividades : PaginaBase, IActividadesView
     {
         private const int TamanoPagina = 8;
@@ -40,8 +37,6 @@ namespace UniCampus.Web
                 _presenter.Inicializar();
             }
         }
-
-        // ================================================================ Eventos
 
         protected void btnNueva_Click(object sender, EventArgs e) { _presenter.NuevaActividad(); }
         protected void btnCerrarEditor_Click(object sender, EventArgs e) { _presenter.CerrarFormulario(); }
@@ -130,8 +125,6 @@ namespace UniCampus.Web
             }
         }
 
-        // ================================================================ Ayudas para el marcado
-
         protected bool EsSeleccionada(object actividadId)
         {
             return Convert.ToInt32(actividadId) == ActividadSeleccionadaId;
@@ -142,16 +135,13 @@ namespace UniCampus.Web
             return EsSeleccionada(actividadId) ? "seleccionada" : "";
         }
 
-        /// <summary>Número de fila absoluto, teniendo en cuenta la página actual.</summary>
         protected int Desplazamiento
         {
             get { return PaginaActual * TamanoPagina; }
         }
 
-        /// <summary>Desplaza la página hasta una sección después de cargar (tras restaurar la posición).</summary>
         private void DesplazarA(string idElemento)
         {
-            // Sin esto, ASP.NET restauraría la posición anterior y anularía el desplazamiento.
             MaintainScrollPositionOnPostBack = false;
             string script = "window.addEventListener('load', function () { setTimeout(function () {" +
                             " var e = document.getElementById('" + idElemento + "');" +
@@ -163,8 +153,6 @@ namespace UniCampus.Web
         {
             return _puedeModerarResenas || Convert.ToInt32(usuarioId) == UsuarioActual.UsuarioId;
         }
-
-        // ================================================================ IActividadesView: datos
 
         public int ActividadEnEdicionId
         {
@@ -198,8 +186,6 @@ namespace UniCampus.Web
         public string EstudianteAInscribirId { get { return ddlEstudiantes.SelectedValue; } }
         public string ResenaCalificacion { get { return rblCalificacion.SelectedValue; } }
         public string ResenaComentario { get { return txtComentario.Text; } }
-
-        // ================================================================ IActividadesView: presentación
 
         public void CargarCatalogos(IList<TipoActividad> tipos, IList<string> modalidades, IList<string> estados)
         {
@@ -242,10 +228,6 @@ namespace UniCampus.Web
             pnlEditor.CssClass = editando ? "panel editando" : "panel";
         }
 
-        /// <summary>
-        /// El formulario siempre está visible para el administrador; "mostrarlo" significa
-        /// llevar al usuario hasta él.
-        /// </summary>
         public void MostrarFormulario(bool visible)
         {
             if (visible && EsAdministrador) DesplazarA("registro");
@@ -382,8 +364,6 @@ namespace UniCampus.Web
         public void MostrarExito(string mensaje) { MostrarToast(litToast, true, mensaje, null); }
 
         public void MostrarErrores(string titulo, IList<string> errores) { MostrarToast(litToast, false, titulo, errores); }
-
-        // ================================================================ Utilidades
 
         private string Etiqueta(string estado)
         {

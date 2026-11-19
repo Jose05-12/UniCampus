@@ -2,10 +2,6 @@
 
 namespace UniCampus.BLL
 {
-    /// <summary>
-    /// Hash de contraseñas con PBKDF2-SHA256 y salt aleatorio por usuario.
-    /// Las contraseñas nunca se guardan en texto plano.
-    /// </summary>
     public static class SeguridadPassword
     {
         private const int Iteraciones = 10000;
@@ -37,7 +33,6 @@ namespace UniCampus.BLL
             byte[] calculado = CalcularHash(password, salt);
             if (calculado.Length != hashEsperado.Length) return false;
 
-            // Comparación en tiempo constante para no filtrar información por tiempos de respuesta.
             int diferencia = 0;
             for (int i = 0; i < calculado.Length; i++)
             {

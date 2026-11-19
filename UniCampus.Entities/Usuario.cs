@@ -1,9 +1,5 @@
 ﻿namespace UniCampus.Entities
 {
-    /// <summary>
-    /// Datos públicos de un usuario. No incluye el hash de la contraseña,
-    /// por eso puede guardarse en la sesión sin exponer credenciales.
-    /// </summary>
     public class Usuario
     {
         public int UsuarioId { get; set; }

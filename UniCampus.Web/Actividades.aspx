@@ -6,7 +6,6 @@
     <asp:HiddenField ID="hfSeleccionada" runat="server" Value="0" />
     <asp:HiddenField ID="hfActividadEnEdicion" runat="server" Value="0" />
 
-    <!-- ===================== Banda de encabezado ===================== -->
     <section class="banda">
         <div class="contenedor banda-interior">
             <div>
@@ -27,7 +26,6 @@
 
     <div class="contenedor cuerpo">
 
-        <!-- ===================== 1. Registrar / editar (solo administrador) ===================== -->
         <asp:Panel ID="pnlEditor" runat="server" CssClass="panel" DefaultButton="btnGuardar" ClientIDMode="Static">
             <div class="panel-cabecera" id="registro">
                 <div class="panel-titulo">
@@ -103,7 +101,6 @@
             </div>
         </asp:Panel>
 
-        <!-- ===================== 2. Listado de actividades ===================== -->
         <section class="panel" aria-labelledby="titulo-listado">
             <div class="panel-cabecera">
                 <div class="panel-titulo">
@@ -198,7 +195,6 @@
             </asp:Panel>
         </section>
 
-        <!-- ===================== 3. Actividad seleccionada ===================== -->
         <div id="seleccion"></div>
         <asp:Panel ID="pnlDetalle" runat="server">
             <div class="seleccion-titulo">
@@ -213,7 +209,6 @@
             </div>
 
             <div class="rejilla-3" style="margin-top: 16px;">
-                <!-- Detalles de la actividad -->
                 <section class="panel">
                     <div class="panel-cabecera">
                         <div class="panel-titulo">
@@ -236,7 +231,6 @@
                     </div>
                 </section>
 
-                <!-- Estudiantes inscritos -->
                 <section class="panel">
                     <div class="panel-cabecera">
                         <div class="panel-titulo">
@@ -284,7 +278,6 @@
                     </div>
                 </section>
 
-                <!-- Vista de la actividad como la ve el estudiante -->
                 <section class="panel">
                     <div class="panel-cabecera">
                         <div class="panel-titulo">
@@ -320,7 +313,6 @@
                 </section>
             </div>
 
-            <!-- ===================== 4. Reseñas y valoraciones ===================== -->
             <section class="panel" style="margin-top: 22px;">
                 <div class="panel-cabecera">
                     <div class="panel-titulo">

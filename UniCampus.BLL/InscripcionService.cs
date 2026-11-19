@@ -5,10 +5,6 @@ using UniCampus.Entities;
 
 namespace UniCampus.BLL
 {
-    /// <summary>
-    /// Reglas de inscripción: quién puede inscribir a quién, en qué actividades y con qué cupos.
-    /// El control de cupos y duplicados definitivo se hace en una transacción de la capa de datos.
-    /// </summary>
     public class InscripcionService
     {
         private readonly InscripcionRepository _inscripciones;
@@ -42,7 +38,6 @@ namespace UniCampus.BLL
             return _inscripciones.EstaInscrito(actividadId, usuarioId);
         }
 
-        /// <summary>Una actividad acepta inscripciones si está Activa o Próxima y aún no termina.</summary>
         public static bool AdmiteInscripciones(Actividad actividad)
         {
             return actividad != null
@@ -64,7 +59,6 @@ namespace UniCampus.BLL
             if (usuarioActual == null)
                 return ResultadoOperacion.Error("Debe iniciar sesión para inscribirse.");
 
-            // Un estudiante solo puede inscribirse a sí mismo; el administrador puede inscribir a otros.
             if (!usuarioActual.EsAdministrador && estudianteId != usuarioActual.UsuarioId)
                 return ResultadoOperacion.Error("No tiene permisos para inscribir a otro usuario.");
 

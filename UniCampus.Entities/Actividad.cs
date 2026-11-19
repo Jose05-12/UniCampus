@@ -2,10 +2,6 @@
 
 namespace UniCampus.Entities
 {
-    /// <summary>
-    /// Representa una actividad académica. Solo transporta datos entre capas:
-    /// no contiene controles de interfaz ni ejecuta SQL.
-    /// </summary>
     public class Actividad
     {
         public int ActividadId { get; set; }
@@ -22,7 +18,6 @@ namespace UniCampus.Entities
         public int Cupos { get; set; }
         public string Estado { get; set; }
 
-        // Datos calculados por la consulta (no se guardan en la tabla).
         public int Inscritos { get; set; }
         public decimal? PromedioCalificacion { get; set; }
         public int TotalResenas { get; set; }

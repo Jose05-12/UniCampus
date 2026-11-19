@@ -5,10 +5,6 @@ using System.Web.Hosting;
 
 namespace UniCampus.Web.Infraestructura
 {
-    /// <summary>
-    /// Registra el detalle técnico de los errores en App_Data/Logs (no accesible desde el navegador).
-    /// Al usuario solo se le muestra un mensaje amigable.
-    /// </summary>
     public static class RegistroErrores
     {
         private static readonly object Bloqueo = new object();
@@ -33,7 +29,6 @@ namespace UniCampus.Web.Infraestructura
             }
             catch
             {
-                // Si no se puede escribir el log no se debe interrumpir la aplicación.
             }
         }
     }

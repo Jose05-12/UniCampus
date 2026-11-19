@@ -6,10 +6,6 @@ using UniCampus.Entities;
 
 namespace UniCampus.BLL
 {
-    /// <summary>
-    /// Reglas de negocio de las actividades académicas.
-    /// No manipula controles ASPX ni escribe SQL: valida y delega en los repositorios.
-    /// </summary>
     public class ActividadService
     {
         public const int CuposMinimos = 1;
@@ -49,7 +45,6 @@ namespace UniCampus.BLL
             return _actividades.ReportePorTipo();
         }
 
-        /// <summary>Actividades abiertas (Activa/Próxima) que aún no terminan, ordenadas por fecha.</summary>
         public List<Actividad> ListarProximas(int cantidad)
         {
             return _actividades.Listar(null)
@@ -103,15 +98,11 @@ namespace UniCampus.BLL
             return actualizado;
         }
 
-        /// <summary>
-        /// Valida campos obligatorios y reglas de negocio. Es pública para poder probarla de forma aislada.
-        /// </summary>
         public List<string> Validar(Actividad a, Actividad existente)
         {
             var errores = new List<string>();
             DateTime hoy = DateTime.Today;
 
-            // Campos obligatorios y longitudes (coinciden con el modelo de datos).
             if (string.IsNullOrWhiteSpace(a.Titulo))
                 errores.Add("El título es obligatorio.");
             else if (a.Titulo.Length < 3 || a.Titulo.Length > 120)
@@ -136,7 +127,6 @@ namespace UniCampus.BLL
             if (string.IsNullOrWhiteSpace(a.Estado) || !EstadosActividad.Todos.Contains(a.Estado))
                 errores.Add("Seleccione un estado válido.");
 
-            // Fechas y horas.
             if (a.FechaInicio == DateTime.MinValue)
                 errores.Add("La fecha de inicio es obligatoria.");
             if (a.FechaFin == DateTime.MinValue)
@@ -158,23 +148,17 @@ namespace UniCampus.BLL
                 && a.FechaInicio.Date < hoy)
                 errores.Add("Una actividad nueva no puede iniciar en una fecha pasada.");
 
-            // Cupos.
             if (a.Cupos < CuposMinimos || a.Cupos > CuposMaximos)
                 errores.Add("Los cupos deben estar entre " + CuposMinimos + " y " + CuposMaximos + ".");
             else if (existente != null && a.Cupos < existente.Inscritos)
                 errores.Add("No puede dejar menos cupos (" + a.Cupos + ") que estudiantes inscritos (" + existente.Inscritos + ").");
 
-            // Duplicados.
             if (errores.Count == 0 && _actividades.ExisteDuplicado(a.Titulo, a.FechaInicio, a.ActividadId))
                 errores.Add("Ya existe una actividad con el mismo título y la misma fecha de inicio.");
 
             return errores;
         }
 
-        /// <summary>
-        /// Si la actividad tiene inscripciones o reseñas se desactiva (estado Cancelada)
-        /// para conservar el historial; si no tiene, se elimina físicamente.
-        /// </summary>
         public ResultadoOperacion Eliminar(int actividadId, Usuario usuarioActual)
         {
             if (usuarioActual == null || !usuarioActual.EsAdministrador)

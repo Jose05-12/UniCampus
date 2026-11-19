@@ -6,7 +6,6 @@ namespace UniCampus.Web
 {
     public class Global : HttpApplication
     {
-        /// <summary>Registra cualquier error no controlado antes de mostrar Error.aspx.</summary>
         protected void Application_Error(object sender, EventArgs e)
         {
             var ex = Server.GetLastError();

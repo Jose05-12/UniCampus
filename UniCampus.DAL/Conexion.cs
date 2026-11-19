@@ -3,9 +3,6 @@ using System.Data.SqlClient;
 
 namespace UniCampus.DAL
 {
-    /// <summary>
-    /// Centraliza la lectura de la cadena de conexión "UniCampusDb" definida en Web.config.
-    /// </summary>
     internal static class Conexion
     {
         private const string NombreCadena = "UniCampusDb";
@@ -21,9 +18,6 @@ namespace UniCampus.DAL
             return new SqlConnection(cadena.ConnectionString);
         }
 
-        /// <summary>
-        /// Escapa los comodines de LIKE para que el texto del usuario se busque literalmente.
-        /// </summary>
         public static string PatronLike(string texto)
         {
             var limpio = texto.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]");
