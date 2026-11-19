@@ -5,13 +5,13 @@ construida con arquitectura de tres capas y el patrón MVP en la capa de present
 
 Corporación Universitaria Americana · Desarrollo de Aplicaciones Web II · Proyecto integrador (tercer corte).
 
-**Repositorio:** _(pegar aquí el enlace de GitHub)_
+**Repositorio:** https://github.com/Jose05-12/UniCampus
 
 ## Integrantes
 
 | Nombre | Usuario GitHub | Responsabilidad |
 |---|---|---|
-| Adrian Carmona | _(completar)_ | _(p. ej. capa de datos y script SQL)_ |
+| Adrian Carmona | Jose05-12 | _(p. ej. capa de datos y script SQL)_ |
 | Luis Fuentes | _(completar)_ | _(p. ej. capa de negocio y validaciones)_ |
 | Rafael Acevedo | _(completar)_ | _(p. ej. páginas Web Forms y Presenters)_ |
 | Samuel Henriquez | _(completar)_ | _(p. ej. pruebas y documentación)_ |
