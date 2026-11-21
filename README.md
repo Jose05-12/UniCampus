@@ -14,7 +14,7 @@ Corporación Universitaria Americana · Desarrollo de Aplicaciones Web II · Pro
 | Adrian Carmona | Jose05-12 | _(p. ej. capa de datos y script SQL)_ |
 | Luis Fuentes | LuisDa21 | Capa de negocio y validaciones |
 | Rafael Acevedo | rafaelacevedo10 | Páginas Web Forms y Presenters |
-| Samuel Henriquez | _(completar)_ | _(p. ej. pruebas y documentación)_ |
+| Samuel Henriquez | samuelhenriquezhd-web | Pruebas y documentación |
 
 ## Tecnologías
 
