@@ -11,7 +11,7 @@ Corporación Universitaria Americana · Desarrollo de Aplicaciones Web II · Pro
 
 | Nombre | Usuario GitHub | Responsabilidad |
 |---|---|---|
-| Adrian Carmona | Jose05-12 | _(p. ej. capa de datos y script SQL)_ |
+| Adrian Carmona | Jose05-12 | Capa de datos y script SQL |
 | Luis Fuentes | LuisDa21 | Capa de negocio y validaciones |
 | Rafael Acevedo | rafaelacevedo10 | Páginas Web Forms y Presenters |
 | Samuel Henriquez | samuelhenriquezhd-web | Pruebas y documentación |
