@@ -169,9 +169,3 @@ un mensaje entendible.
 | 10 | Eliminar con dependencias | Eliminar una actividad con inscritos | Se desactiva (Cancelada) en lugar de borrarse |
 
 Las evidencias de cada caso están en el informe técnico (`Docs/01_Informe_Tecnico.pdf`) y en `Docs/capturas`.
-
-## Trabajo con GitHub
-
-- Cada integrante clona el repositorio, trabaja en una rama por funcionalidad (`feature/...`) y abre un pull request.
-- Mensajes de commit sugeridos: `feat: ...`, `fix: ...`, `docs: ...`.
-- El `.gitignore` excluye `bin`, `obj`, `.vs`, archivos de usuario y los logs de `App_Data/Logs`.
